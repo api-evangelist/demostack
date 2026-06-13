@@ -1,0 +1,90 @@
+specificationVersion: "0.1"
+id: demostack-plans-pricing
+name: Demostack Plans and Pricing
+description: >-
+  Demostack uses custom quote-based enterprise pricing that is not publicly
+  listed. All plans require a sales conversation to determine final cost.
+  Based on third-party reports, pricing starts at approximately $50,000 per
+  year for smaller teams and scales to $100,000+ per year for larger
+  organizations requiring advanced capabilities such as mobile demo support.
+url: https://www.demostack.com/pricing
+plans:
+  - name: Standard
+    description: >-
+      Entry-level enterprise plan for smaller go-to-market teams. Includes
+      core demo cloning, no-code editing, personalization, basic analytics,
+      and standard CRM integrations. Supports a single application and up to
+      10 users. Pricing is approximately $50,000 per year based on third-party
+      market data; actual price requires a sales quote.
+    url: https://www.demostack.com/pricing
+    quote: true
+    currency: USD
+    billingCycle: annual
+    features:
+      - Demo cloning (Demostack Cloner)
+      - No-code demo editing
+      - Demo personalization
+      - Basic analytics and engagement tracking
+      - Salesforce integration
+      - HubSpot integration
+      - Slack notifications
+      - Single application support
+      - Up to 10 users
+      - SSO support
+  - name: Plus
+    description: >-
+      Mid-tier plan for growing presales and sales engineering teams that
+      need expanded user counts and additional application support. Includes
+      all Standard features plus advanced analytics and collaboration tools.
+      Pricing requires a sales quote.
+    url: https://www.demostack.com/pricing
+    quote: true
+    currency: USD
+    billingCycle: annual
+    features:
+      - All Standard features
+      - Expanded user count
+      - Additional application support
+      - Advanced analytics and deal intelligence
+      - Role-based access control (RBAC)
+      - Enhanced collaboration tools
+  - name: Pro
+    description: >-
+      Advanced plan for larger enterprise sales teams requiring mobile demo
+      support and multi-application environments. Includes AI-powered features
+      such as the AI Simulation Builder Agent and AI Database Bulk Category
+      Editing. Pricing is approximately $100,000 per year based on third-party
+      market data; actual price requires a sales quote.
+    url: https://www.demostack.com/pricing
+    quote: true
+    currency: USD
+    billingCycle: annual
+    features:
+      - All Plus features
+      - Mobile app demo support
+      - Multiple application environments
+      - AI Simulation Builder Agent
+      - AI Database Bulk Category Editing
+      - AI Text and Image Generator
+      - Webhooks to custom endpoints
+      - Demostack MCP connector
+      - SOC 2 Type I and II compliance
+  - name: Platinum
+    description: >-
+      Top-tier enterprise plan for large organizations with complex GTM
+      operations. Includes all Pro features plus dedicated support, custom
+      SLAs, advanced governance, and full platform access. Pricing is fully
+      custom and requires a sales engagement.
+    url: https://www.demostack.com/pricing
+    quote: true
+    currency: USD
+    billingCycle: annual
+    features:
+      - All Pro features
+      - Dedicated customer success manager
+      - Custom SLAs
+      - Advanced enterprise governance
+      - Custom domain support
+      - Priority support
+      - Unlimited applications
+      - Custom integrations

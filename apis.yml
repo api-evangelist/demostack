@@ -1,0 +1,83 @@
+aid: demostack
+name: Demostack
+description: >-
+  Demostack is an enterprise-grade product simulation and demo automation
+  platform that enables SaaS go-to-market teams to create, deliver, and
+  analyze interactive product demos at scale. The platform provides a
+  patented Cloner technology that converts live product workflows into
+  fully independent demo environments, allowing sales engineers to
+  personalize demo data and product experiences without touching production
+  systems. Demostack exposes webhooks and native CRM integrations to push
+  real-time demo engagement events into Salesforce, HubSpot, Slack, and
+  custom endpoints, enabling revenue teams to measure how demos impact
+  deals. The platform additionally supports an MCP connector so demo
+  intelligence can be queried through AI assistants such as Claude, ChatGPT,
+  and Gemini using natural language.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/demostack/refs/heads/main/apis.yml
+created: "2026-06-13"
+modified: "2026-06-13"
+specificationVersion: "0.19"
+tags:
+  - Sales Demo
+  - Demo Automation
+  - Product Simulation
+  - Webhooks
+  - CRM Integration
+  - Sales Enablement
+  - Presales
+  - Sales Engineering
+  - Analytics
+  - AI
+apis:
+  - aid: demostack:demostack-webhooks
+    name: Demostack Webhooks
+    description: >-
+      Demostack webhooks push real-time demo engagement events to any CRM,
+      data warehouse, BI tool, or custom HTTP endpoint. Events are fired when
+      prospects view, interact with, or complete a demo, enabling automated
+      follow-ups, lead scoring updates, and cold-deal flagging. Native
+      connectors surface these events directly inside Salesforce, HubSpot,
+      and Slack without requiring custom integration work.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.demostack.com/platform/integration/hubspot
+    baseURL: https://api.demostack.com
+    tags:
+      - Webhooks
+      - CRM Integration
+      - Salesforce
+      - HubSpot
+      - Slack
+      - Demo Analytics
+    properties:
+      - type: Documentation
+        url: https://www.demostack.com/platform/integration/hubspot
+      - type: Website
+        url: https://www.demostack.com
+common:
+  - type: Website
+    url: https://www.demostack.com
+  - type: Documentation
+    url: https://www.demostack.com/platform/integration/hubspot
+  - type: GitHubOrg
+    url: https://github.com/demostack
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/demostack
+  - type: Blog
+    url: https://www.demostack.com/blog
+  - type: Pricing
+    url: https://www.demostack.com/pricing
+  - type: StatusPage
+    url: https://status.demostack.com
+  - type: X
+    url: https://twitter.com/DemostackHQ
+  - type: Plans
+    url: plans/demostack-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/demostack-rate-limits.yml
+  - type: FinOps
+    url: finops/demostack-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

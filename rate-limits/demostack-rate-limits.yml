@@ -1,0 +1,59 @@
+specificationVersion: "0.1"
+id: demostack-rate-limits
+name: Demostack Rate Limits
+description: >-
+  Demostack does not publicly document specific rate limits for its webhook
+  or integration APIs. The platform is an enterprise product with
+  quote-based contracts, and rate limit thresholds are negotiated as part
+  of the enterprise agreement. The following limits are inferred from
+  standard SaaS enterprise practices and general platform behavior. Customers
+  requiring confirmed limits should contact Demostack support or their
+  account representative.
+url: https://www.demostack.com
+limits:
+  - name: Webhook Event Delivery
+    description: >-
+      Rate at which Demostack pushes real-time demo engagement events to
+      configured webhook endpoints including CRM systems, data warehouses,
+      and custom HTTP endpoints. Events are triggered by prospect interactions
+      with demos and tours.
+    unit: events per minute
+    limit: 60
+    scope: account
+    notes: >-
+      Estimated based on typical enterprise SaaS event streaming patterns.
+      Actual limits are defined per enterprise contract. Contact Demostack
+      for confirmed thresholds.
+  - name: CRM Sync (Salesforce / HubSpot)
+    description: >-
+      Frequency at which demo activity data is synchronized into connected
+      CRM systems. Syncs create or update leads, log demo activity events,
+      and enrich contact records with engagement data.
+    unit: syncs per hour
+    limit: 1000
+    scope: account
+    notes: >-
+      Subject to the API rate limits of the connected CRM platform (Salesforce
+      or HubSpot). Actual Demostack-side limits are not publicly documented.
+  - name: Demostack MCP Queries
+    description: >-
+      Rate at which natural language queries can be submitted to the Demostack
+      MCP connector for integration with AI assistants such as Claude,
+      ChatGPT, and Gemini.
+    unit: requests per minute
+    limit: 30
+    scope: user
+    notes: >-
+      Estimated. The MCP connector was newly introduced and specific rate
+      limits are not publicly documented. Limits may vary by AI assistant
+      and enterprise plan tier.
+  - name: Demo Clone Operations
+    description: >-
+      Frequency at which new demo environments can be cloned from live
+      product workflows using the Demostack Cloner technology.
+    unit: clones per day
+    limit: 50
+    scope: account
+    notes: >-
+      Estimated based on enterprise plan capacity. Actual limits depend on
+      contract tier and number of licensed applications.

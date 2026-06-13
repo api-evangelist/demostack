@@ -1,0 +1,88 @@
+specificationVersion: "1.0"
+id: demostack-finops
+name: Demostack FinOps
+description: >-
+  FinOps Framework FOCUS-aligned cost and usage metadata for Demostack,
+  an enterprise sales demo automation platform. Demostack uses annual
+  subscription pricing negotiated via sales engagement. Costs are fixed
+  per contract rather than consumption-based, though usage of AI features
+  and integrations may influence renewal pricing.
+url: https://www.demostack.com/pricing
+provider:
+  name: Demostack
+  url: https://www.demostack.com
+  pricingModel: subscription
+  billingCycle: annual
+  currency: USD
+  quoteBased: true
+costDimensions:
+  - id: platform-subscription
+    name: Platform Subscription Fee
+    description: >-
+      Annual base subscription fee covering platform access, core demo cloning,
+      editing, personalization, and standard integrations. Scaled by plan tier
+      (Standard, Plus, Pro, Platinum) and negotiated per enterprise contract.
+    unit: per year
+    estimatedRange:
+      min: 50000
+      max: 200000
+    notes: >-
+      Third-party sources report Standard plans starting near $50,000/year
+      and Pro plans near $100,000/year. Platinum pricing is fully custom.
+      All figures require direct sales validation.
+  - id: user-seats
+    name: User Seats
+    description: >-
+      Per-user or per-seat component of the subscription. Standard plans
+      include approximately 10 users; additional seats may incur incremental
+      cost depending on the negotiated agreement.
+    unit: per user per year
+    estimatedRange:
+      min: 3000
+      max: 8000
+    notes: >-
+      Seat-based pricing is bundled into the overall enterprise contract.
+      Exact per-seat cost is not publicly disclosed.
+  - id: application-environments
+    name: Application Environments
+    description: >-
+      Cost component tied to the number of product applications for which
+      demo environments are licensed. Standard plans cover a single application;
+      higher tiers unlock multi-application support.
+    unit: per application per year
+    estimatedRange:
+      min: 0
+      max: 20000
+    notes: >-
+      Multi-application support is available on Plus, Pro, and Platinum tiers.
+      Additional application licensing cost is included in contract negotiation.
+  - id: mobile-demo-addon
+    name: Mobile Demo Add-On
+    description: >-
+      Optional add-on enabling sales teams to demo mobile applications from
+      a laptop. Available starting with the Pro tier. May be available as a
+      paid add-on on lower tiers.
+    unit: per year
+    estimatedRange:
+      min: 5000
+      max: 15000
+    notes: >-
+      Pricing for the mobile demo capability is not publicly listed and
+      is negotiated as part of the overall contract.
+optimization:
+  - recommendation: >-
+      Consolidate demo environment management under a single Demostack
+      account to maximize seat utilization and avoid redundant licensing
+      across sales sub-teams.
+  - recommendation: >-
+      Leverage the Salesforce and HubSpot native integrations rather than
+      custom webhook endpoints where possible to reduce integration
+      maintenance overhead and stay within standard plan entitlements.
+  - recommendation: >-
+      Use the Demostack analytics dashboard to identify underutilized demo
+      environments and retire or repurpose them before contract renewal
+      to negotiate based on actual consumption.
+  - recommendation: >-
+      Evaluate the Demostack MCP connector to reduce manual demo reporting
+      effort by enabling natural language queries against demo engagement
+      data, potentially reducing time spent on manual analysis and reporting.
