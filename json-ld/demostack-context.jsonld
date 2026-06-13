@@ -1,0 +1,109 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "demostack": "https://www.demostack.com/vocab/",
+
+    "Demo": "demostack:Demo",
+    "DemoSession": "demostack:DemoSession",
+    "DemoEnvironment": "demostack:DemoEnvironment",
+    "DemoEngagementEvent": "demostack:DemoEngagementEvent",
+    "Prospect": "demostack:Prospect",
+    "SalesEngineer": "demostack:SalesEngineer",
+    "DemoTemplate": "demostack:DemoTemplate",
+    "WebhookPayload": "demostack:WebhookPayload",
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "identifier": "schema:identifier",
+    "dateCreated": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:date"
+    },
+    "dateModified": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:date"
+    },
+
+    "sessionId": {
+      "@id": "demostack:sessionId",
+      "@type": "xsd:string"
+    },
+    "demoId": {
+      "@id": "demostack:demoId",
+      "@type": "xsd:string"
+    },
+    "eventType": {
+      "@id": "demostack:eventType",
+      "@type": "xsd:string",
+      "@comment": "One of: demo_viewed, demo_interacted, demo_completed, session_started, session_ended"
+    },
+    "eventTimestamp": {
+      "@id": "demostack:eventTimestamp",
+      "@type": "xsd:dateTime"
+    },
+    "prospectEmail": {
+      "@id": "demostack:prospectEmail",
+      "@type": "xsd:string"
+    },
+    "prospectName": {
+      "@id": "demostack:prospectName",
+      "@type": "xsd:string"
+    },
+    "companyName": {
+      "@id": "demostack:companyName",
+      "@type": "xsd:string"
+    },
+    "crmDealId": {
+      "@id": "demostack:crmDealId",
+      "@type": "xsd:string"
+    },
+    "engagementScore": {
+      "@id": "demostack:engagementScore",
+      "@type": "xsd:integer"
+    },
+    "durationSeconds": {
+      "@id": "demostack:durationSeconds",
+      "@type": "xsd:integer"
+    },
+    "clonerEnabled": {
+      "@id": "demostack:clonerEnabled",
+      "@type": "xsd:boolean"
+    },
+    "integrationTarget": {
+      "@id": "demostack:integrationTarget",
+      "@type": "xsd:string",
+      "@comment": "One of: salesforce, hubspot, slack, custom"
+    },
+    "webhookEndpointUrl": {
+      "@id": "demostack:webhookEndpointUrl",
+      "@type": "@id"
+    },
+    "mcpEnabled": {
+      "@id": "demostack:mcpEnabled",
+      "@type": "xsd:boolean"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "https://www.demostack.com",
+      "@type": "schema:Organization",
+      "name": "Demostack",
+      "description": "Enterprise-grade product simulation and demo automation platform for SaaS go-to-market teams.",
+      "url": "https://www.demostack.com"
+    },
+    {
+      "@id": "https://api.demostack.com",
+      "@type": "schema:WebAPI",
+      "name": "Demostack API",
+      "description": "API and webhook endpoints for Demostack demo engagement events and CRM integrations.",
+      "url": "https://api.demostack.com",
+      "schema:documentation": "https://www.demostack.com/platform/integration/hubspot"
+    }
+  ]
+}
