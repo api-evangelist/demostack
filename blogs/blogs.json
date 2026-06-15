@@ -31,5 +31,16 @@
       "url": "https://www.demostack.com/post/demo-intelligence-inside-claude-chatgpt-and-gemini"
     }
   ],
-  "fetched": "2026-06-13"
+  "fetched": "2026-06-14T20:42:17Z",
+  "repo": "demostack",
+  "feeds": [
+    {
+      "source": "https://www.linkedin.com/company/demostack",
+      "feed_url": "https://www.linkedin.com/company/demostack",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0
 }
