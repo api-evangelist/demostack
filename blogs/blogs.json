@@ -1,46 +1,14 @@
 {
-  "name": "Demostack Blog",
-  "url": "https://www.demostack.com/blog",
-  "rssUrl": null,
-  "rssConfirmed": false,
-  "description": "Blog posts from Demostack covering demo automation, sales enablement, presales, and product simulation topics.",
-  "notes": "No RSS/Atom feed discovered at standard paths (feed.xml, rss.xml, blog/rss.xml, blog/feed). Blog is served from www.demostack.com/blog and posts under /post/*.",
-  "posts": [
-    {
-      "title": "The D.E.M.O. Framework: Turn Chaotic Demo Prep Into A Shared Operating System",
-      "url": "https://www.demostack.com/post/the-demo-framework"
-    },
-    {
-      "title": "Demystifying the demo solution landscape",
-      "url": "https://www.demostack.com/post/demystifying-the-demo-solution-landscape"
-    },
-    {
-      "title": "Demostack is a leader on the G2 Presales Grid Report",
-      "url": "https://www.demostack.com/post/demostack-is-a-leader-on-g2"
-    },
-    {
-      "title": "Demo ops: A cross-functional transformation",
-      "url": "https://www.demostack.com/post/demo-ops-a-cross-functional-transformation"
-    },
-    {
-      "title": "Demostack launches Demo Partner and Builder Agent",
-      "url": "https://www.demostack.com/post/demostack-launches-demo-partner-and-builder-agent-bringing-agentic-ai-to-every-step-of-the-product-simulation-lifecycle"
-    },
-    {
-      "title": "Demostack MCP: Reveal demo intelligence from the AI tool you already use",
-      "url": "https://www.demostack.com/post/demo-intelligence-inside-claude-chatgpt-and-gemini"
-    }
-  ],
-  "fetched": "2026-06-14T20:42:17Z",
   "repo": "demostack",
   "feeds": [
     {
-      "source": "https://www.linkedin.com/company/demostack",
-      "feed_url": "https://www.linkedin.com/company/demostack",
-      "title": "",
+      "source": "https://www.demostack.com/blog",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
     }
   ],
-  "post_count": 0
+  "fetched": "2026-06-27T12:36:49Z",
+  "post_count": 12,
+  "agent_pulled": "2026-06-27"
 }
