@@ -56,6 +56,12 @@ apis:
       - type: Website
         url: https://www.demostack.com
 common:
+  - type: TrustCenter
+    url: security/demostack-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/demostack-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/demostack-domain-security.yml
   - type: Website
     url: https://www.demostack.com
   - type: Documentation
