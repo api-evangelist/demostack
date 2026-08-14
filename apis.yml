@@ -10,9 +10,11 @@ description: >-
   systems. Demostack exposes webhooks and native CRM integrations to push
   real-time demo engagement events into Salesforce, HubSpot, Slack, and
   custom endpoints, enabling revenue teams to measure how demos impact
-  deals. The platform additionally supports an MCP connector so demo
-  intelligence can be queried through AI assistants such as Claude, ChatGPT,
-  and Gemini using natural language.
+  deals. The platform additionally ships a first-party remote MCP server so
+  demo intelligence can be queried through AI assistants such as Claude,
+  ChatGPT, and Gemini using natural language. Demostack publishes no public
+  API reference or OpenAPI definition; its machine-readable surface is the
+  OAuth-protected MCP endpoint and the in-product webhook configuration.
 type: Index
 accessModel:
   pricing: paid
@@ -29,7 +31,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/demostack.png
 url: https://raw.githubusercontent.com/api-evangelist/demostack/refs/heads/main/apis.yml
 created: "2026-06-13"
-modified: "2026-06-13"
+modified: "2026-08-14"
 specificationVersion: "0.19"
 tags:
   - Sales Demo
@@ -42,6 +44,7 @@ tags:
   - Sales Engineering
   - Analytics
   - AI
+  - MCP
 apis:
   - aid: demostack:demostack-webhooks
     name: Demostack Webhooks
@@ -51,9 +54,11 @@ apis:
       prospects view, interact with, or complete a demo, enabling automated
       follow-ups, lead scoring updates, and cold-deal flagging. Native
       connectors surface these events directly inside Salesforce, HubSpot,
-      and Slack without requiring custom integration work.
+      and Slack without requiring custom integration work. Demostack publishes
+      no webhook payload schema, event-name registry, signing scheme, or
+      retry policy on the public web.
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.demostack.com/platform/integration/hubspot
+    humanURL: https://www.demostack.com/integrations
     baseURL: https://api.demostack.com
     tags:
       - Webhooks
@@ -64,30 +69,79 @@ apis:
       - Demo Analytics
     properties:
       - type: Documentation
-        url: https://www.demostack.com/platform/integration/hubspot
+        url: https://www.demostack.com/integrations
+      - type: Webhooks
+        url: asyncapi/demostack-events-webhooks.yml
       - type: Website
         url: https://www.demostack.com
+  - aid: demostack:demostack-mcp
+    name: Demostack MCP
+    description: >-
+      Demostack MCP is a first-party remote Model Context Protocol server that
+      brings demo intelligence into Claude, ChatGPT, Gemini, and any other
+      MCP-compatible client. It is a live HTTPS endpoint an MCP client POSTs
+      JSON-RPC to at https://mcp.demostack.com/mcp, protected by OAuth 2.1 with
+      PKCE and RFC 7591 dynamic client registration, so a client can register
+      and authorize itself without a pre-provisioned credential. Demostack
+      states it launches with a focused set of questions covering presenter
+      activity, prospect engagement, demo performance, content usage, and
+      partner adoption. The live tools/list is auth-gated, so tool names and
+      input schemas are not published.
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+    humanURL: https://www.demostack.com/integrations
+    baseURL: https://mcp.demostack.com
+    tags:
+      - MCP
+      - AI
+      - Agents
+      - Demo Analytics
+      - OAuth
+    properties:
+      - type: MCPServer
+        url: mcp/demostack-mcp.yml
+      - type: Authentication
+        url: authentication/demostack-authentication.yml
+      - type: OAuthScopes
+        url: scopes/demostack-scopes.yml
+      - type: Documentation
+        url: https://www.demostack.com/integrations
 common:
   - type: TrustCenter
     url: security/demostack-trust-center.yml
   - type: VulnerabilityDisclosure
     url: security/demostack-vulnerability-disclosure.yml
+  - type: Security
+    url: https://www.demostack.com/trust-center
+  - type: Compliance
+    url: https://www.demostack.com/trust-center
   - type: DomainSecurity
     url: security/demostack-domain-security.yml
+  - type: Conformance
+    url: conformance/demostack-conformance.yml
   - type: Website
     url: https://www.demostack.com
   - type: Documentation
-    url: https://www.demostack.com/platform/integration/hubspot
-  - type: GitHubOrg
-    url: https://github.com/demostack
+    url: https://help.demostack.com/
+  - type: Support
+    url: https://www.demostack.com/contact-us
   - type: LinkedIn
     url: https://www.linkedin.com/company/demostack
   - type: Blog
     url: https://www.demostack.com/blog
   - type: Pricing
     url: https://www.demostack.com/pricing
+  - type: Login
+    url: https://app.demostack.com
+  - type: TermsOfService
+    url: https://www.demostack.com/termsandconditions
+  - type: PrivacyPolicy
+    url: https://www.demostack.com/privacy
   - type: StatusPage
     url: https://status.demostack.com
+  - type: Lifecycle
+    url: lifecycle/demostack-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/demostack-changelog.yml
   - type: X
     url: https://twitter.com/DemostackHQ
   - type: Plans
@@ -96,6 +150,63 @@ common:
     url: rate-limits/demostack-rate-limits.yml
   - type: FinOps
     url: finops/demostack-finops.yml
+  - type: Packages
+    url: packages/demostack-packages.yml
+  - type: MCPServer
+    url: mcp/demostack-mcp.yml
+  - type: Authentication
+    url: authentication/demostack-authentication.yml
+  - type: OAuthScopes
+    url: scopes/demostack-scopes.yml
+  - type: Webhooks
+    url: asyncapi/demostack-events-webhooks.yml
+  - type: WellKnown
+    url: well-known/demostack-well-known.yml
+  - type: SecurityTxt
+    url: well-known/demostack-security.txt
+  - type: LLMsTxt
+    url: llms/demostack-llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-14'
+  status: enriched
+  artifacts_added: 13
+  pass: local-v1
+x-coverage:
+  state: covered
+  note: >-
+    Demostack has a real, reachable machine surface — a first-party remote MCP
+    server at https://mcp.demostack.com/mcp with full OAuth 2.1 discovery — plus
+    an llms.txt, an RFC 9116 security.txt, a public trust center and a dated
+    release-notes changelog. What it does NOT publish is a REST API reference or
+    an OpenAPI definition: api.demostack.com answers 200 "Health Check" at the
+    root and 403 to every other path, and docs.demostack.com,
+    developer.demostack.com and developers.demostack.com do not resolve.
+  evidence:
+    - url: https://mcp.demostack.com/.well-known/oauth-authorization-server
+      status: 200
+    - url: https://mcp.demostack.com/mcp
+      status: 401
+    - url: https://www.demostack.com/llms.txt
+      status: 200
+    - url: https://www.demostack.com/.well-known/security.txt
+      status: 200
+    - url: https://api.demostack.com/openapi.json
+      status: 403
+    - url: https://www.demostack.com/openapi.json
+      status: 404
+  checked: '2026-08-14'
+x-notes:
+  github_org_removed:
+    date: '2026-08-14'
+    detail: >-
+      A GitHubOrg pointer to https://github.com/demostack was removed. That
+      organization was created 2017-07-05, holds three repositories last pushed
+      in August 2019 (a Go CLI for encrypted environment variables and SSH keys,
+      its auth service, and a Chrome MFA autofill extension), and is licensed
+      "Copyright (c) 2019 Joseph Spurrier". It is a namesake, not Demostack, Inc.
+      demostack-io, demostackhq, demostack-hq, demostack-ai and getdemostack all
+      404 — Demostack, Inc. has no public GitHub organization. See
+      packages/demostack-packages.yml.
