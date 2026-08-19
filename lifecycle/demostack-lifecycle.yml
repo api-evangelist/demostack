@@ -1,0 +1,61 @@
+generated: '2026-08-14'
+method: searched
+source: https://www.demostack.com/trust-center
+description: >-
+  Demostack runs a public status page and publishes 90-day availability
+  statistics from its trust center. It publishes no API versioning policy, no
+  deprecation policy, no Sunset/Deprecation header support, and no SLA document
+  on the public web — consistent with having no public API reference at all. SLAs
+  exist only inside enterprise contracts.
+
+status_page: https://status.demostack.com
+status_page_evidence:
+  url: https://status.demostack.com/
+  http_status: 200
+  note: >-
+    Renders client-side; the JSON/RSS endpoints a Statuspage-style site normally
+    exposes (/api/v2/summary.json, /history.rss) return 403 from the bucket
+    fronting it, so status cannot be read by machine. Demostack's trust center
+    states the page publishes 90-day availability statistics.
+
+versioning:
+  scheme: null
+  current: null
+  docs: null
+  note: >-
+    No API versioning scheme is published. The only versioned artifact Demostack
+    publishes publicly is the desktop application (semver, currently 14.0.0) —
+    see changelog/demostack-changelog.yml.
+
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  deprecation_header: unknown
+  note: >-
+    No deprecation or sunset policy is published on demostack.com, in the public
+    help center, or on any Demostack host probed. Nothing to point a Deprecation
+    type at.
+
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA document. Demostack's pricing page markets "Enterprise
+    Governance" (SOC 2, RBAC, SSO) but names no uptime commitment; SLAs are
+    negotiated per enterprise contract.
+
+support:
+  contact: https://www.demostack.com/contact-us
+  help_center: https://help.demostack.com/
+  help_center_gated: true
+  in_product: >-
+    Support tickets can be opened from a chat agent inside the product
+    (desktop app 14.0.0, 2025-10-29).
+
+deprecated_operations: []
+
+gaps:
+  - No API versioning policy.
+  - No deprecation or sunset policy.
+  - No published SLA or uptime target.
+  - Status page has no machine-readable endpoint.

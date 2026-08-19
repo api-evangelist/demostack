@@ -1,0 +1,81 @@
+generated: '2026-08-14'
+method: searched
+source: >-
+  Direct registry lookups against npm, PyPI, RubyGems, crates.io and the GitHub
+  API, plus the Demostack public site and help center
+description: >-
+  Demostack ships no client libraries. No first-party SDK exists on any public
+  package registry, and Demostack's own site and help center never link to one —
+  consistent with having no public API reference. Integration with Demostack is
+  done through its in-product native connectors (Salesforce, HubSpot, Slack), a
+  configurable webhook destination, and the remote MCP server, none of which
+  require a client library.
+
+packages: []
+
+package_count: 0
+official_sdk_count: 0
+
+registries_checked:
+  - registry: npm
+    queries:
+      - {name: demostack, status: 404, version: null, published: null}
+      - {name: '@demostack/sdk', status: 404, version: null, published: null}
+      - {name: demostack-sdk, status: 404, version: null, published: null}
+      - {name: '@demostack/mcp', status: 404, version: null, published: null}
+      - {name: demostack-mcp, status: 404, version: null, published: null}
+    search: >-
+      A full-text search of registry.npmjs.org for "demostack" returns no package
+      published by or for Demostack, Inc.
+  - registry: pypi
+    queries:
+      - {name: demostack, status: 404, version: null, published: null}
+  - registry: rubygems
+    queries:
+      - {name: demostack, status: 404, version: null, published: null}
+  - registry: crates.io
+    queries:
+      - {name: demostack, status: 403, version: null, published: null, note: 'crates.io rejected the unauthenticated request; treated as not found, not as a hit.'}
+  - registry: maven-central
+    queries: []
+    note: Not probed — Demostack publishes no JVM surface and links to no Java client.
+  - registry: nuget
+    queries: []
+    note: Not probed — Demostack publishes no .NET surface and links to no C# client.
+  - registry: pkg.go.dev
+    queries: []
+    note: >-
+      Not probed for a Demostack, Inc. module. The only Go module carrying the
+      demostack name is github.com/demostack/cli, which belongs to a different
+      party — see ownership_finding below.
+
+ownership_finding:
+  subject: https://github.com/demostack
+  verdict: not-this-company
+  detail: >-
+    The GitHub organization github.com/demostack is NOT Demostack, Inc. It was
+    created 2017-07-05 — roughly three years before Demostack, Inc. was founded —
+    and holds three repositories (cli, auth, mfa-browser-autofill) last pushed in
+    August 2019. They are a Go command-line tool for storing encrypted
+    environment variables and SSH keys, its authentication service, and a Chrome
+    MFA autofill extension. The LICENSE reads "Copyright (c) 2019 Joseph
+    Spurrier". None of it has any relationship to product simulation, demo
+    automation, or the demostack.com platform. The organization has no
+    description, is unverified, and has zero followers.
+  evidence:
+    - {url: 'https://api.github.com/orgs/demostack', http_status: 200, field: 'created_at 2017-07-05T03:56:13Z, description null, is_verified false'}
+    - {url: 'https://raw.githubusercontent.com/demostack/cli/HEAD/LICENSE', http_status: 200, field: 'Copyright (c) 2019 Joseph Spurrier'}
+    - {url: 'https://api.github.com/repos/demostack/cli', http_status: 200, field: 'pushed_at 2019-08-10, description "Manage sensitive environment variables and SSH information."'}
+  action_taken: >-
+    The GitHubOrg pointer to https://github.com/demostack was REMOVED from
+    apis.yml in this pass. Leaving it credited Demostack, Inc. with a public
+    source presence it does not have, and pointed anyone following the link at a
+    third party's abandoned CLI. No cli/ artifact was written for the same
+    reason.
+  alternates_checked:
+    - {org: demostack-io, status: 404}
+    - {org: demostackhq, status: 404}
+    - {org: demostack-hq, status: 404}
+    - {org: demostack-ai, status: 404}
+    - {org: getdemostack, status: 404}
+  conclusion: Demostack, Inc. has no public GitHub organization.

@@ -1,0 +1,101 @@
+generated: '2026-08-14'
+method: probed
+source: live probe of every Demostack host in apis.yml plus the MCP host discovered in this pass
+description: >-
+  Well-known discovery surface for Demostack. The marketing host serves a real
+  RFC 9116 security.txt. The MCP host (mcp.demostack.com) serves real OAuth
+  discovery documents — RFC 8414 authorization-server metadata and RFC 9728
+  protected-resource metadata for the MCP endpoint. The API host
+  (api.demostack.com) answers 403 to every path except the root health check,
+  and the single-page app host (app.demostack.com) answers 200 with the same
+  1,767-byte HTML shell for every /.well-known/* path, so nothing there is a
+  document.
+hosts:
+  - host: https://www.demostack.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/plain
+        file: demostack-security.txt
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://mcp.demostack.com
+    documents:
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json
+        file: demostack-oauth-authorization-server.json
+        note: RFC 8414 authorization server metadata for the Demostack MCP server.
+      - path: /.well-known/oauth-protected-resource/mcp
+        status: 200
+        content_type: application/json
+        file: demostack-oauth-protected-resource.json
+        note: >-
+          RFC 9728 protected-resource metadata, advertised in the WWW-Authenticate
+          header of the 401 returned by POST https://mcp.demostack.com/mcp.
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://api.demostack.com
+    note: >-
+      Root returns 200 with the body "Health Check". Every other path, including
+      every /.well-known/* path, returns 403 from a Google frontend. Nothing is
+      readable anonymously on this host.
+    documents:
+      - path: /.well-known/security.txt
+        status: 403
+      - path: /.well-known/openid-configuration
+        status: 403
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+      - path: /.well-known/oauth-protected-resource
+        status: 403
+      - path: /.well-known/api-catalog
+        status: 403
+      - path: /.well-known/ai-plugin.json
+        status: 403
+      - path: /.well-known/agent-card.json
+        status: 403
+      - path: /.well-known/agent.json
+        status: 403
+  - host: https://app.demostack.com
+    note: >-
+      REJECTED AS A HIT. This host is a single-page application whose catch-all
+      route answers 200 with the identical 1,767-byte HTML shell for every
+      /.well-known/* path probed. A 200 that returns an SPA shell is not a
+      document; none of these are counted as present.
+    documents:
+      - path: /.well-known/agent-card.json
+        status: 200
+        content_type: text/html
+        document: false
+      - path: /.well-known/agent.json
+        status: 200
+        content_type: text/html
+        document: false
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: text/html
+        document: false
+summary:
+  documents_found: 3
+  hosts_probed: 4
+  security_txt: true
+  oauth_metadata: true
+  api_catalog: false
+  agent_card: false

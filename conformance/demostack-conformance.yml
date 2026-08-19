@@ -1,0 +1,123 @@
+generated: '2026-08-14'
+method: probed
+source: >-
+  Live probes of https://mcp.demostack.com/.well-known/* and
+  https://www.demostack.com/.well-known/security.txt, plus the published
+  compliance posture at https://www.demostack.com/trust-center
+description: >-
+  Which cross-cutting standards Demostack's public surface actually conforms to.
+  Everything marked conforms:true was observed in a document Demostack serves;
+  everything marked false was probed and missed. There is no OpenAPI to derive
+  from, so no REST-layer conformance (RFC 9457, pagination, idempotency) can be
+  asserted in either direction — those are recorded as unknown rather than
+  guessed.
+
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      RFC 6749 authorization code grant advertised in
+      well-known/demostack-oauth-authorization-server.json
+      (response_types_supported [code], grant_types_supported
+      [authorization_code, refresh_token]).
+  - id: rfc8414-oauth-authorization-server-metadata
+    conforms: true
+    evidence: >-
+      https://mcp.demostack.com/.well-known/oauth-authorization-server returns
+      200 application/json with issuer, authorization_endpoint, token_endpoint.
+  - id: rfc9728-oauth-protected-resource-metadata
+    conforms: true
+    evidence: >-
+      https://mcp.demostack.com/.well-known/oauth-protected-resource/mcp returns
+      200 application/json, and the 401 from the MCP endpoint advertises it in
+      the WWW-Authenticate resource_metadata parameter.
+  - id: rfc7636-pkce
+    conforms: true
+    evidence: code_challenge_methods_supported [S256] in the authorization server metadata.
+  - id: rfc7591-dynamic-client-registration
+    conforms: true
+    evidence: registration_endpoint https://mcp.demostack.com/register in the authorization server metadata.
+  - id: rfc7009-token-revocation
+    conforms: true
+    evidence: revocation_endpoint https://mcp.demostack.com/revoke in the authorization server metadata.
+  - id: rfc6750-bearer-token
+    conforms: true
+    evidence: >-
+      bearer_methods_supported [header] in the protected-resource metadata;
+      observed WWW-Authenticate Bearer error="invalid_token" on a 401.
+  - id: mcp
+    conforms: true
+    evidence: >-
+      Streamable HTTP MCP endpoint at https://mcp.demostack.com/mcp answering
+      JSON-RPC with an OAuth challenge. Demostack markets it as "Demostack MCP"
+      on https://www.demostack.com/integrations.
+  - id: rfc9116-security-txt
+    conforms: true
+    evidence: >-
+      https://www.demostack.com/.well-known/security.txt returns 200 text/plain
+      with Contact and Expires fields.
+  - id: oidc-discovery
+    conforms: false
+    evidence: >-
+      /.well-known/openid-configuration returns 404 on mcp.demostack.com and on
+      www.demostack.com, and 403 on api.demostack.com. The MCP authorization
+      server advertises openid/profile/email scopes but publishes no OIDC
+      discovery document.
+  - id: rfc9727-api-catalog
+    conforms: false
+    evidence: /.well-known/api-catalog returns 404 on www.demostack.com and 403 on api.demostack.com.
+  - id: a2a-agent-card
+    conforms: false
+    evidence: >-
+      /.well-known/agent-card.json and /.well-known/agent.json miss on every
+      Demostack host. app.demostack.com answers 200 for both but with the same
+      HTML SPA shell it returns for every path, which is not a card.
+  - id: openapi
+    conforms: false
+    evidence: >-
+      No OpenAPI or Swagger document is served on any Demostack host. See
+      x-coverage in apis.yml for the probe list.
+  - id: asyncapi
+    conforms: false
+    evidence: >-
+      Demostack advertises webhooks but publishes no AsyncAPI document. See
+      asyncapi/demostack-events-webhooks.yml.
+  - id: rfc9457-problem-details
+    conforms: unknown
+    evidence: >-
+      No public API responses are readable anonymously. The MCP 401 body is a
+      flat {"error","error_description"} OAuth error object, not
+      application/problem+json — but that is the OAuth error format, not an
+      API-wide error contract.
+  - id: soc2
+    conforms: true
+    evidence: >-
+      "Demostack has earned its SOC2 Type II attestation with PWC, effective
+      October 31, 2023", published at https://www.demostack.com/trust-center.
+      Auditor's report described as unqualified.
+  - id: gdpr
+    conforms: true
+    evidence: >-
+      Trust center states GDPR compliance, Privacy by Design, and a DPA based on
+      post-Schrems II Standard Contractual Clauses.
+  - id: hipaa
+    conforms: true
+    evidence: >-
+      Trust center states Demostack operates as a Business Associate and complies
+      with the HIPAA Privacy and Security standards for ePHI.
+  - id: iso-27001
+    conforms: false
+    evidence: Not named on the trust center or security page.
+  - id: pci-dss
+    conforms: false
+    evidence: Not named on the trust center or security page.
+  - id: fedramp
+    conforms: false
+    evidence: Not named on the trust center or security page.
+
+summary:
+  conforms: 12
+  does_not_conform: 7
+  unknown: 1
+  compliance_program_published: true
+  compliance_url: https://www.demostack.com/trust-center

@@ -1,0 +1,125 @@
+generated: '2026-08-14'
+method: searched
+source: https://www.demostack.com/integrations
+spec_type: none
+description: >-
+  Demostack has a real event surface and advertises it publicly, but publishes
+  no AsyncAPI document and no webhook reference. This artifact captures the
+  event catalog as Demostack documents it — the webhook product statement on the
+  integrations page, plus the per-destination event and field lists in the
+  Salesforce, HubSpot and Slack help-center guides. No event names, payload
+  schemas, headers, signing scheme, retry policy or delivery guarantees are
+  published anywhere, and none are invented here.
+
+surface:
+  webhooks: true
+  asyncapi_spec: false
+  event_catalog_published: false
+  payload_schemas_published: false
+  signing_documented: false
+  retry_policy_documented: false
+  subscription_api_documented: false
+
+webhooks:
+  status: advertised
+  source: https://www.demostack.com/integrations
+  statement: >-
+    "Push real-time demo events to any CRM, data warehouse, BI tool, or custom
+    endpoint. Auto-follow-up when a session ends, flag deals gone cold when demos
+    go untouched, and analyze demo activity alongside the rest of your GTM data."
+  destinations:
+    - any CRM
+    - data warehouse
+    - BI tool
+    - custom HTTP endpoint
+  note: >-
+    Marked "NEW!" on the integrations page alongside Demostack MCP. Configuration
+    is done inside the Demostack application; there is no public documentation of
+    the endpoint registration surface, the payload, or the signature.
+
+event_triggers:
+  - trigger: prospect opens a demo
+    source: https://www.demostack.com/integrations
+    destinations: [Salesforce, webhook]
+    note: 'Published as "demo activity reaches Salesforce the moment it happens, like a prospect opening a demo or finishing a session."'
+  - trigger: prospect finishes a demo session
+    source: https://www.demostack.com/integrations
+    destinations: [Salesforce, HubSpot, webhook]
+  - trigger: shared link / sandbox visit session ends
+    source: https://help.demostack.com/migration/articles/demostack-and-slack-integration
+    destinations: [Slack]
+    note: >-
+      Demostack waits 30 minutes of inactivity before ending the session and
+      sending the notification. Notifications are configurable per shared link.
+  - trigger: live demo completed
+    source: https://help.demostack.com/migration/articles/demostacks-hubspot-crm-integration-guide
+    destinations: [HubSpot]
+    note: >-
+      Logged as an activity under the selected Deal. Demostack states live demos
+      must last longer than 3 minutes to be logged.
+  - trigger: demo untouched / gone cold
+    source: https://www.demostack.com/integrations
+    destinations: [webhook]
+    note: Derived signal Demostack names as a webhook use case, not a discrete event name.
+
+payloads:
+  - destination: Salesforce
+    object: Activity (Event)
+    source: https://help.demostack.com/migration/articles/demostack-and-salesforce-integration-technical-guide
+    fields:
+      - {name: DemostackAssetLink, type: URL, length: 255}
+      - {name: DemostackOpportunityStage, type: Text, length: 100}
+      - {name: DemostackPresenterName, type: Text, length: 100}
+      - {name: DemostackAssetID, type: Text, length: 100}
+      - {name: DemostackShareId, type: Text, length: 100}
+      - {name: DemostackDurationInMin, type: Number, precision: '5,2'}
+      - {name: DemostackDemoScreens, type: Number, precision: '5,0'}
+      - {name: DemostackCompletedSteps, type: Number, precision: '5,0'}
+      - {name: DemostackTotalSteps, type: Number, precision: '5,0'}
+      - {name: DemostackIsTourCompleted, type: Checkbox}
+    also_writes: [Lead]
+    permissions_required:
+      - Accounts (read)
+      - Contacts (read)
+      - Leads (read, create)
+      - Opportunities (read)
+      - Events (read, edit)
+  - destination: HubSpot
+    object: Activity on Deal
+    source: https://help.demostack.com/migration/articles/demostacks-hubspot-crm-integration-guide
+    fields:
+      - demo name
+      - presenter name
+      - start time
+      - end time
+      - session duration
+      - number of screens presented
+      - links to Demostack assets
+  - destination: Slack
+    object: Channel notification
+    source: https://help.demostack.com/migration/articles/demostack-and-slack-integration
+    fields:
+      - visitor name
+      - visitor email
+      - number of screens visited
+      - opportunity name (when applicable)
+      - visit session duration
+      - number of tour steps completed (tour visitors only)
+      - link to the demo/tour page in the Demostack platform
+      - Slack mention of the share-link creator
+  - destination: custom endpoint
+    object: unknown
+    source: https://www.demostack.com/integrations
+    fields: []
+    note: >-
+      Demostack advertises delivery to any custom HTTP endpoint but publishes no
+      payload schema for it. An integrator cannot write a receiver from public
+      documentation.
+
+gaps:
+  - No AsyncAPI document is published on any Demostack host.
+  - No named event types (no demo.viewed / session.ended style identifiers).
+  - No JSON payload schema or example body for the custom-endpoint destination.
+  - No signature header, timestamp, or replay-protection scheme documented.
+  - No retry, backoff, or delivery-guarantee statement.
+  - No public API for registering or listing webhook endpoints.

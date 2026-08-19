@@ -1,90 +1,39 @@
 specificationVersion: "0.1"
 id: demostack-plans-pricing
 name: Demostack Plans and Pricing
-description: >-
-  Demostack uses custom quote-based enterprise pricing that is not publicly
-  listed. All plans require a sales conversation to determine final cost.
-  Based on third-party reports, pricing starts at approximately $50,000 per
-  year for smaller teams and scales to $100,000+ per year for larger
-  organizations requiring advanced capabilities such as mobile demo support.
+generated: '2026-08-14'
+method: searched
+source: https://www.demostack.com/pricing
 url: https://www.demostack.com/pricing
-plans:
-  - name: Standard
-    description: >-
-      Entry-level enterprise plan for smaller go-to-market teams. Includes
-      core demo cloning, no-code editing, personalization, basic analytics,
-      and standard CRM integrations. Supports a single application and up to
-      10 users. Pricing is approximately $50,000 per year based on third-party
-      market data; actual price requires a sales quote.
-    url: https://www.demostack.com/pricing
-    quote: true
-    currency: USD
-    billingCycle: annual
-    features:
-      - Demo cloning (Demostack Cloner)
-      - No-code demo editing
-      - Demo personalization
-      - Basic analytics and engagement tracking
-      - Salesforce integration
-      - HubSpot integration
-      - Slack notifications
-      - Single application support
-      - Up to 10 users
-      - SSO support
-  - name: Plus
-    description: >-
-      Mid-tier plan for growing presales and sales engineering teams that
-      need expanded user counts and additional application support. Includes
-      all Standard features plus advanced analytics and collaboration tools.
-      Pricing requires a sales quote.
-    url: https://www.demostack.com/pricing
-    quote: true
-    currency: USD
-    billingCycle: annual
-    features:
-      - All Standard features
-      - Expanded user count
-      - Additional application support
-      - Advanced analytics and deal intelligence
-      - Role-based access control (RBAC)
-      - Enhanced collaboration tools
-  - name: Pro
-    description: >-
-      Advanced plan for larger enterprise sales teams requiring mobile demo
-      support and multi-application environments. Includes AI-powered features
-      such as the AI Simulation Builder Agent and AI Database Bulk Category
-      Editing. Pricing is approximately $100,000 per year based on third-party
-      market data; actual price requires a sales quote.
-    url: https://www.demostack.com/pricing
-    quote: true
-    currency: USD
-    billingCycle: annual
-    features:
-      - All Plus features
-      - Mobile app demo support
-      - Multiple application environments
-      - AI Simulation Builder Agent
-      - AI Database Bulk Category Editing
-      - AI Text and Image Generator
-      - Webhooks to custom endpoints
-      - Demostack MCP connector
-      - SOC 2 Type I and II compliance
-  - name: Platinum
-    description: >-
-      Top-tier enterprise plan for large organizations with complex GTM
-      operations. Includes all Pro features plus dedicated support, custom
-      SLAs, advanced governance, and full platform access. Pricing is fully
-      custom and requires a sales engagement.
-    url: https://www.demostack.com/pricing
-    quote: true
-    currency: USD
-    billingCycle: annual
-    features:
-      - All Pro features
-      - Dedicated customer success manager
-      - Custom SLAs
-      - Advanced enterprise governance
-      - Custom domain support
-      - Priority support
-      - Unlimited applications
-      - Custom integrations
+plan_count: 0
+description: >-
+  Demostack publishes no plans and no prices. Its pricing page carries a product
+  narrative, an FAQ and a "Schedule a time with the Demostack team" call to
+  action; it names no tier, no price, no quota and no included limits. The page
+  states only that "Every Demostack plan is designed to provide the foundation
+  for your Demo Technology Layer" and that SOC 2 compliance, RBAC and SSO are
+  included in the core. Pricing is quote-only through a sales conversation.
+plans: []
+pricing_model:
+  public: false
+  self_serve: false
+  free_tier: false
+  trial: unknown
+  quote_only: true
+  billing_contact: https://www.demostack.com/contact-us
+evidence:
+  - url: https://www.demostack.com/pricing
+    http_status: 200
+    finding: >-
+      Fetched 2026-08-14. No tier names, no currency amounts, no per-seat or
+      per-application rates, and no usage quotas appear in the rendered page.
+correction:
+  date: '2026-08-14'
+  detail: >-
+    A previous revision of this file listed four tiers — Standard, Plus, Pro and
+    Platinum — with annual prices of roughly $50,000 and $100,000, seat counts
+    and per-tier feature lists. None of those tier names or figures appear
+    anywhere on demostack.com; they were assembled from third-party pricing
+    aggregators, not from the provider. They have been removed. A quote-only
+    provider recorded as publishing four priced plans is a false positive, and
+    the honest zero is the useful measurement.

@@ -1,0 +1,93 @@
+generated: '2026-08-14'
+method: searched
+source: https://help.demostack.com/migration/articles/release-notes-for-desktop-app
+description: >-
+  The only dated, versioned change record Demostack publishes to the public web
+  is the release-notes article for the Demostack desktop app, in the public
+  slice of its HubSpot help center. There is no API changelog, no platform
+  changelog on demostack.com, and no /changelog, /whats-new or /product-updates
+  page (all 404). The public release notes stop at 14.0.0 on 2025-10-29 — no
+  entry has been added in the nine and a half months since, while the company
+  shipped Demostack MCP (May 2026) and the Demo Partner / Builder Agent products
+  (June 2026), neither of which appears here.
+
+scope: Demostack desktop app
+covers_api: false
+versioning:
+  scheme: semver
+  current: 14.0.0
+  current_date: '2025-10-29'
+  earliest_published: 'Arctic Fox 4.10.0 (2023-04-19)'
+staleness:
+  last_entry: '2025-10-29'
+  checked: '2026-08-14'
+  days_since_last_entry: 289
+  note: >-
+    Product launches announced on the Demostack blog after this date (Demostack
+    MCP, 2026-05-20; Demo Partner and Builder Agent, 2026-06-03) are absent from
+    the release notes.
+
+entries:
+  - version: 14.0.0
+    date: '2025-10-29'
+    breaking: false
+    additions:
+      - 'CTA on Tours: add multiple buttons to each tooltip in a tour step, linking to surveys, docs, or external trials.'
+      - 'Support: open support tickets directly from a chat agent in the product.'
+  - version: 13.0.180
+    date: '2025-10-27'
+    breaking: false
+    improvements:
+      - 'Performance: faster, smoother, more reliable overall experience.'
+      - 'Video playback: improved performance, added MP4 support.'
+      - 'Process tracking: new event tracking to monitor app activity.'
+  - version: 13.0.174
+    date: '2025-10-23'
+    breaking: false
+    additions:
+      - 'Insecure browsing option: users can choose in app settings whether to allow insecure browsing.'
+  - version: 13.0.159
+    date: '2025-10-19'
+    breaking: false
+    fixes:
+      - Fix an issue playing PDFs.
+      - Improve loading time.
+      - 'Security: fix an overlay issue to keep demos safe from unsafe elements.'
+  - version: 13.0.157
+    date: '2025-10-15'
+    breaking: false
+    fixes:
+      - 'SSO redirects: fixed issues opening SSO sessions in a new tab.'
+      - Horizontal scrolling hidden for a cleaner view.
+      - Fixed the first search result being cut off.
+      - Prevented all tags being removed when closing the Manage Tags modal with the X button.
+      - Fixed hover behavior for guidance tooltips.
+  - version: 13.0.145
+    date: '2025-09-29'
+    breaking: false
+    fixes:
+      - 'LeadTheWay navigation: fixed moving between pages.'
+      - 'Share demo link: updated copy text for clarity.'
+  - version: 13.0.139
+    date: '2025-09-24'
+    breaking: false
+    fixes:
+      - Fixed errors when demo assets were duplicated.
+      - Resolved modal settings interference between demos and playbook assets in the Desktop Console.
+      - Improved tooltip behavior in the Tour Editor.
+  - version: 13.0.125
+    date: '2025-09-16'
+    breaking: false
+    additions:
+      - 'Play Later list: items can now be removed.'
+      - 'Auto sync share links: external share links auto-sync.'
+    fixes:
+      - Fixed the playbook "Play Now" button in the browser.
+
+gaps:
+  - No changelog covers the Demostack API, webhooks, or the MCP server.
+  - No RSS/Atom or JSON feed for the release notes.
+  - >-
+    The rest of the Demostack knowledge base is customer-only — the help center
+    states "Sign in to see all our KB Articles!" and only 19 articles appear in
+    its public sitemap.

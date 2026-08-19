@@ -1,0 +1,60 @@
+generated: '2026-08-14'
+method: probed
+source: https://mcp.demostack.com/.well-known/oauth-authorization-server
+description: >-
+  Demostack publishes no scopes reference page and no OpenAPI with oauth2
+  securitySchemes. The scopes below were read directly from the RFC 8414
+  authorization-server metadata and the RFC 9728 protected-resource metadata
+  served by the Demostack MCP host — the only place Demostack publishes a scope
+  list. They are the standard OpenID Connect / OAuth set; Demostack declares no
+  product-specific scopes (no read:demos, write:tours, or similar), so an agent
+  cannot request or reason about least-privilege access to Demostack data.
+
+schemes:
+  - name: demostack-mcp-oauth
+    source: well-known/demostack-oauth-authorization-server.json
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://mcp.demostack.com/authorize
+        tokenUrl: https://mcp.demostack.com/token
+
+scopes:
+  - scope: openid
+    description: Request an OpenID Connect subject identifier for the authenticated user.
+    flows: [authorizationCode]
+    sources:
+      - well-known/demostack-oauth-authorization-server.json
+      - well-known/demostack-oauth-protected-resource.json
+  - scope: profile
+    description: Basic profile claims for the authenticated user.
+    flows: [authorizationCode]
+    sources:
+      - well-known/demostack-oauth-authorization-server.json
+      - well-known/demostack-oauth-protected-resource.json
+  - scope: email
+    description: Email address claim for the authenticated user.
+    flows: [authorizationCode]
+    sources:
+      - well-known/demostack-oauth-authorization-server.json
+      - well-known/demostack-oauth-protected-resource.json
+  - scope: offline_access
+    description: Issue a refresh token so the client can act after the access token expires.
+    flows: [authorizationCode]
+    sources:
+      - well-known/demostack-oauth-authorization-server.json
+      - well-known/demostack-oauth-protected-resource.json
+
+resource:
+  resource: https://mcp.demostack.com/mcp
+  authorization_servers:
+    - https://mcp.demostack.com/
+  scopes_supported: [openid, profile, email, offline_access]
+  bearer_methods_supported: [header]
+
+summary:
+  scope_count: 4
+  product_scopes: 0
+  note: >-
+    All four scopes are identity scopes. Authorization to Demostack data is
+    decided server-side from the authenticated user's tenant and role, not from
+    a requested scope.

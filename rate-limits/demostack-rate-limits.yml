@@ -1,59 +1,49 @@
 specificationVersion: "0.1"
 id: demostack-rate-limits
 name: Demostack Rate Limits
+generated: '2026-08-14'
+method: searched
+source: https://www.demostack.com/integrations
+url: https://www.demostack.com/integrations
+limit_count: 0
 description: >-
-  Demostack does not publicly document specific rate limits for its webhook
-  or integration APIs. The platform is an enterprise product with
-  quote-based contracts, and rate limit thresholds are negotiated as part
-  of the enterprise agreement. The following limits are inferred from
-  standard SaaS enterprise practices and general platform behavior. Customers
-  requiring confirmed limits should contact Demostack support or their
-  account representative.
-url: https://www.demostack.com
-limits:
-  - name: Webhook Event Delivery
-    description: >-
-      Rate at which Demostack pushes real-time demo engagement events to
-      configured webhook endpoints including CRM systems, data warehouses,
-      and custom HTTP endpoints. Events are triggered by prospect interactions
-      with demos and tours.
-    unit: events per minute
-    limit: 60
-    scope: account
-    notes: >-
-      Estimated based on typical enterprise SaaS event streaming patterns.
-      Actual limits are defined per enterprise contract. Contact Demostack
-      for confirmed thresholds.
-  - name: CRM Sync (Salesforce / HubSpot)
-    description: >-
-      Frequency at which demo activity data is synchronized into connected
-      CRM systems. Syncs create or update leads, log demo activity events,
-      and enrich contact records with engagement data.
-    unit: syncs per hour
-    limit: 1000
-    scope: account
-    notes: >-
-      Subject to the API rate limits of the connected CRM platform (Salesforce
-      or HubSpot). Actual Demostack-side limits are not publicly documented.
-  - name: Demostack MCP Queries
-    description: >-
-      Rate at which natural language queries can be submitted to the Demostack
-      MCP connector for integration with AI assistants such as Claude,
-      ChatGPT, and Gemini.
-    unit: requests per minute
-    limit: 30
-    scope: user
-    notes: >-
-      Estimated. The MCP connector was newly introduced and specific rate
-      limits are not publicly documented. Limits may vary by AI assistant
-      and enterprise plan tier.
-  - name: Demo Clone Operations
-    description: >-
-      Frequency at which new demo environments can be cloned from live
-      product workflows using the Demostack Cloner technology.
-    unit: clones per day
-    limit: 50
-    scope: account
-    notes: >-
-      Estimated based on enterprise plan capacity. Actual limits depend on
-      contract tier and number of licensed applications.
+  Demostack publishes no rate limits. There is no public API reference to carry
+  them, the integrations page and the public help-center articles state none, and
+  no rate-limit response headers can be observed because every anonymous request
+  to api.demostack.com returns 403 and the MCP endpoint returns 401 before any
+  quota is applied. Thresholds, if any, are set inside the enterprise contract.
+limits: []
+response_headers:
+  observed: []
+  documented: []
+  exhaustion_status: null
+  retry_after: null
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header was returned on any
+    anonymous response from api.demostack.com or mcp.demostack.com.
+evidence:
+  - url: https://www.demostack.com/integrations
+    http_status: 200
+    finding: Advertises webhooks and Demostack MCP; states no limits, quotas or throttling behavior.
+  - url: https://api.demostack.com/
+    http_status: 200
+    finding: Returns the 12-byte body "Health Check" with no rate-limit headers.
+  - url: https://mcp.demostack.com/mcp
+    http_status: 401
+    finding: >-
+      OAuth challenge only. WWW-Authenticate carries error="invalid_token" and
+      resource_metadata; no rate-limit headers are present.
+  - url: https://help.demostack.com/migration/articles/demostack-and-salesforce-integration-technical-guide
+    http_status: 200
+    finding: >-
+      Documents the OAuth flow and the ten custom Salesforce Activity fields but
+      states no Demostack-side rate limits.
+correction:
+  date: '2026-08-14'
+  detail: >-
+    A previous revision of this file listed four numeric limits — 60 webhook
+    events/minute, 1,000 CRM syncs/hour, 30 MCP queries/minute, 50 demo clones/day
+    — each annotated "estimated". Demostack publishes none of those numbers.
+    Estimates recorded in a limits[] array are indistinguishable downstream from
+    limits the provider actually published, so they have been removed in favour of
+    an honest limit_count of 0.

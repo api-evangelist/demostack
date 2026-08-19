@@ -1,0 +1,104 @@
+generated: '2026-08-14'
+method: probed
+source: https://mcp.demostack.com/.well-known/oauth-authorization-server
+docs: https://help.demostack.com/migration/articles/demostack-and-salesforce-integration-technical-guide
+description: >-
+  Demostack publishes no REST API reference and no OpenAPI, so there are no
+  securitySchemes to derive from. The authentication model recorded here was
+  established by probing the surfaces Demostack actually exposes: the OAuth 2.1
+  authorization server that fronts the Demostack MCP server, and the OAuth 2.0
+  authorization-code flows documented for the CRM integrations. The user-facing
+  platform itself authenticates with SSO.
+
+summary:
+  types: [oauth2]
+  oauth2_flows: [authorizationCode, refreshToken]
+  api_key_in: []
+  dynamic_client_registration: true
+  pkce: S256
+  bearer_methods: [header]
+  note: >-
+    No API key, basic auth, or static-token scheme is documented anywhere on the
+    Demostack public surface.
+
+schemes:
+  - name: demostack-mcp-oauth
+    type: oauth2
+    surface: MCP
+    source: well-known/demostack-oauth-authorization-server.json
+    description: >-
+      OAuth 2.1 authorization server protecting https://mcp.demostack.com/mcp.
+      Supports RFC 7591 dynamic client registration, so an MCP client registers
+      itself and completes the authorization code + PKCE flow with no
+      pre-provisioned credential.
+    flows:
+      - flow: authorizationCode
+        issuer: https://mcp.demostack.com/
+        authorizationUrl: https://mcp.demostack.com/authorize
+        tokenUrl: https://mcp.demostack.com/token
+        registrationUrl: https://mcp.demostack.com/register
+        revocationUrl: https://mcp.demostack.com/revoke
+        codeChallengeMethods: [S256]
+        scopes:
+          openid: OpenID Connect subject identifier
+          profile: Basic profile claims
+          email: Email address claim
+          offline_access: Refresh token issuance
+    token_endpoint_auth_methods: [client_secret_post, client_secret_basic]
+    client_id_metadata_document_supported: true
+    failure_response:
+      http_status: 401
+      body_field: error
+      value: invalid_token
+      www_authenticate: >-
+        Bearer error="invalid_token", error_description="...",
+        resource_metadata="https://mcp.demostack.com/.well-known/oauth-protected-resource/mcp"
+
+  - name: salesforce-integration-oauth
+    type: oauth2
+    surface: CRM integration (outbound)
+    source: https://help.demostack.com/migration/articles/demostack-and-salesforce-integration-technical-guide
+    description: >-
+      Demostack connects to a customer's Salesforce org using the OAuth 2.0
+      authorization code grant. Demostack is the client; Salesforce is the
+      authorization server. Tokens are validated before use and refreshed when
+      expired, and Demostack states they are encrypted at rest.
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+        callbackUrl: https://api.demostack.com/integrations/salesforce/callback
+
+  - name: hubspot-integration-oauth
+    type: oauth2
+    surface: CRM integration (outbound)
+    source: https://help.demostack.com/migration/articles/demostacks-hubspot-crm-integration-guide
+    description: >-
+      Demostack connects to a customer's HubSpot portal through HubSpot's
+      app-authorization redirect flow; the customer selects an account and
+      grants Demostack the required permissions. No endpoint URLs are published.
+
+  - name: slack-integration-oauth
+    type: oauth2
+    surface: Notification integration (outbound)
+    source: https://help.demostack.com/migration/articles/demostack-and-slack-integration
+    description: >-
+      Demostack connects to a customer's Slack workspace through Slack's
+      app-approval flow. The customer names the authentication connection, which
+      Demostack then uses to manage the integration. No endpoint URLs are
+      published.
+
+platform_authentication:
+  sso: true
+  source: https://www.demostack.com/pricing
+  note: >-
+    Demostack states "SOC2 compliance, RBAC, and SSO are built into the core" on
+    its pricing page. This is end-user platform authentication, not an API
+    credential.
+
+gaps:
+  - No public API reference, so no per-operation security requirements exist.
+  - No API key issuance or rotation documentation is published.
+  - >-
+    No /.well-known/openid-configuration is served on any Demostack host; the
+    MCP authorization server advertises openid and profile scopes but publishes
+    only RFC 8414 metadata, not OIDC discovery metadata.

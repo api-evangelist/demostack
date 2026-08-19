@@ -1,0 +1,94 @@
+generated: '2026-08-14'
+method: probed
+status: published
+source: https://mcp.demostack.com/mcp
+docs: https://www.demostack.com/integrations
+description: >-
+  Demostack ships a first-party remote MCP server. It is a live, reachable HTTPS
+  endpoint that an MCP client POSTs JSON-RPC to — not a package a human has to
+  install — and it is protected by OAuth 2.1 with dynamic client registration,
+  so a client can register and complete the authorization code + PKCE flow on
+  its own. Demostack markets it as "Demostack MCP": demo intelligence surfaced
+  inside Claude, ChatGPT, Gemini and other MCP-compatible tools.
+
+deployment:
+  mode: remote
+  endpoint: https://mcp.demostack.com/mcp
+  auth: oauth
+  verified: probed
+
+server:
+  name: demostack
+  transport: http
+  url: https://mcp.demostack.com/mcp
+  runtime: uvicorn
+  protected_resource_metadata: https://mcp.demostack.com/.well-known/oauth-protected-resource/mcp
+
+authorization:
+  scheme: OAuth 2.1 (authorization code + PKCE)
+  issuer: https://mcp.demostack.com/
+  authorization_endpoint: https://mcp.demostack.com/authorize
+  token_endpoint: https://mcp.demostack.com/token
+  registration_endpoint: https://mcp.demostack.com/register
+  revocation_endpoint: https://mcp.demostack.com/revoke
+  dynamic_client_registration: true
+  code_challenge_methods: [S256]
+  grant_types: [authorization_code, refresh_token]
+  scopes: [openid, profile, email, offline_access]
+  bearer_methods_supported: [header]
+  metadata_files:
+    - well-known/demostack-oauth-authorization-server.json
+    - well-known/demostack-oauth-protected-resource.json
+
+introspection:
+  tools_list: gated
+  note: >-
+    An anonymous POST of {"jsonrpc":"2.0","id":1,"method":"tools/list"} to
+    https://mcp.demostack.com/mcp returns HTTP 401 with
+    {"error":"invalid_token"} and a WWW-Authenticate Bearer challenge carrying
+    resource_metadata. The same is true of initialize. The real tool names and
+    inputSchemas therefore require an authenticated introspection against a
+    Demostack tenant and are NOT recorded here. Nothing below is a tool name —
+    they are the capability areas Demostack itself published.
+
+capability_areas:
+  source: https://www.demostack.com/post/demo-intelligence-inside-claude-chatgpt-and-gemini
+  note: >-
+    Demostack states the connector "launches with a focused set of questions
+    covering" these areas, and that "when you ask something outside that set, it
+    tells you directly instead of guessing." Recorded verbatim as areas, not as
+    tools — no tool names are published and none are invented here.
+  areas:
+    - presenter activity
+    - prospect engagement
+    - demo performance
+    - content usage
+    - partner adoption
+  published_example_questions:
+    - "Who from [target account] has visited our sandbox this week?"
+    - "Which shared links have more than three unique visitors?"
+    - "Which demos haven't been used in the last 90 days?"
+
+clients_supported:
+  - Claude
+  - ChatGPT
+  - Gemini
+  - any MCP-compatible client
+
+tools: []
+
+x-evidence:
+  - fetched: '2026-08-14'
+    url: https://mcp.demostack.com/mcp
+    method: POST tools/list
+    http_status: 401
+    body: '{"error": "invalid_token", ...}'
+    www_authenticate: 'Bearer error="invalid_token", resource_metadata="https://mcp.demostack.com/.well-known/oauth-protected-resource/mcp"'
+  - fetched: '2026-08-14'
+    url: https://mcp.demostack.com/.well-known/oauth-authorization-server
+    http_status: 200
+    content_type: application/json
+  - fetched: '2026-08-14'
+    url: https://mcp.demostack.com/.well-known/oauth-protected-resource/mcp
+    http_status: 200
+    content_type: application/json
