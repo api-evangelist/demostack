@@ -37,6 +37,18 @@ tags:
   - Sales Demo
   - Demo Automation
   - Product Simulation
+  - Webhook
+  - CRM Integration
+  - Sales Enablement
+  - Presales
+  - Sales Engineering
+  - Analytics
+  - Artificial Intelligence
+  - MCP
+tags_raw:
+  - Sales Demo
+  - Demo Automation
+  - Product Simulation
   - Webhooks
   - CRM Integration
   - Sales Enablement
@@ -61,6 +73,13 @@ apis:
     humanURL: https://www.demostack.com/integrations
     baseURL: https://api.demostack.com
     tags:
+      - Webhook
+      - CRM Integration
+      - Salesforce
+      - HubSpot
+      - Slack
+      - Demo Analytics
+    tags_raw:
       - Webhooks
       - CRM Integration
       - Salesforce
@@ -91,6 +110,12 @@ apis:
     humanURL: https://www.demostack.com/integrations
     baseURL: https://mcp.demostack.com
     tags:
+      - MCP
+      - Artificial Intelligence
+      - Agents
+      - Demo Analytics
+      - Authentication
+    tags_raw:
       - MCP
       - AI
       - Agents
