@@ -1,4 +1,4 @@
-# Demostack (demostack)
+# Demostack
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,59 +64,140 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Demostack is an enterprise-grade product simulation and demo automation platform that enables SaaS go-to-market teams to create, deliver, and analyze interactive product demos at scale. The platform provides a patented Cloner technology that converts live product workflows into fully independent demo environments, allowing sales engineers to personalize demo data and product experiences without touching production systems. Demostack exposes webhooks and native CRM integrations to push real-time demo engagement events into Salesforce, HubSpot, Slack, and custom endpoints, enabling revenue teams to measure how demos impact deals. The platform additionally supports an MCP connector so demo intelligence can be queried through AI assistants such as Claude, ChatGPT, and Gemini using natural language.
+Demostack is an enterprise-grade product simulation and demo automation platform that enables SaaS go-to-market teams to create, deliver, and analyze interactive product demos at scale. The platform provides a patented Cloner technology that converts live product workflows into fully independent demo environments, allowing sales engineers to personalize demo data and product experiences without touching production systems. Demostack exposes webhooks and native CRM integrations to push real-time demo engagement events into Salesforce, HubSpot, Slack, and custom endpoints, enabling revenue teams to measure how demos impact deals. The platform additionally ships a first-party remote MCP server so demo intelligence can be queried through AI assistants such as Claude, ChatGPT, and Gemini using natural language. Demostack publishes no public API reference or OpenAPI definition; its machine-readable surface is the OAuth-protected MCP endpoint and the in-product webhook configuration.
 
-APIs.json: https://raw.githubusercontent.com/api-evangelist/demostack/refs/heads/main/apis.yml
+**Areas:** Sales Demo · Demo Automation · Product Simulation · Webhook · CRM Integration · Sales Enablement · Presales · Sales Engineering · Analytics · Artificial Intelligence · MCP
 
-Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=demostack-api-evangelist&utm_content=repo
+## Demostack on APIs.io
 
-## Tags
+Everything profiled for Demostack is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/demostack/](https://apis.io/providers/demostack/)** — or go straight to one of the APIs or properties below.
 
-- Sales Demo
-- Demo Automation
-- Product Simulation
-- Webhooks
-- CRM Integration
-- Sales Enablement
-- Presales
-- Sales Engineering
-- Analytics
-- AI
+### APIs (2)
 
-## APIs
+- [Demostack Webhooks](https://apis.io/apis/demostack/demostack-webhooks/) — Demostack webhooks push real-time demo engagement events to any CRM, data warehouse, BI tool, or custom HTTP endpoint. Events are fired when prospects view,…
+- [Demostack MCP](https://apis.io/apis/demostack/demostack-mcp/) — Demostack MCP is a first-party remote Model Context Protocol server that brings demo intelligence into Claude, ChatGPT, Gemini, and any other MCP-compatible…
 
-### Demostack Webhooks
+### Published properties
 
-Demostack webhooks push real-time demo engagement events to any CRM, data warehouse, BI tool, or custom HTTP endpoint. Events are fired when prospects view, interact with, or complete a demo, enabling automated follow-ups, lead scoring updates, and cold-deal flagging. Native connectors surface these events directly inside Salesforce, HubSpot, and Slack without requiring custom integration work.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- Documentation: https://www.demostack.com/platform/integration/hubspot
+#### AsyncAPI (1)
 
-## Plans, Rate Limits, and FinOps
+Event-driven and webhook contracts.
 
-- Plans: [plans/demostack-plans-pricing.yml](plans/demostack-plans-pricing.yml)
-- Rate Limits: [rate-limits/demostack-rate-limits.yml](rate-limits/demostack-rate-limits.yml)
-- FinOps: [finops/demostack-finops.yml](finops/demostack-finops.yml)
+- [Demostack Events Webhooks](https://apis.io/asyncapis/demostack/demostack-events-webhooks/)
 
-Demostack uses annual enterprise subscription pricing with four tiers: Standard (~$50,000/year), Plus, Pro (~$100,000/year), and Platinum. All pricing requires a direct sales engagement. Rate limits for webhooks and integrations are not publicly documented and are defined per enterprise contract.
+#### MCP servers (1)
 
-## Timestamps
+Model Context Protocol servers that expose the API to agents.
 
-- Created: 2026-06-13
-- Modified: 2026-06-13
+- [demostack](https://apis.io/servers/demostack/demostack/)
 
-## Common
+#### JSON-LD (1)
 
-| Type | URL |
-|------|-----|
-| Website | https://www.demostack.com |
-| Documentation | https://www.demostack.com/platform/integration/hubspot |
-| GitHub Org | https://github.com/demostack |
-| LinkedIn | https://www.linkedin.com/company/demostack |
-| Blog | https://www.demostack.com/blog |
-| Pricing | https://www.demostack.com/pricing |
-| Status Page | https://status.demostack.com |
-| X (Twitter) | https://twitter.com/DemostackHQ |
+Linked-data contexts for the provider's vocabulary.
 
-## Maintainers
+- [Demostack Context](https://apis.io/jsonld/demostack/demostack-context/)
 
-- Kin Lane (kin@apievangelist.com)
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Demostack Authentication](https://apis.io/security/demostack/demostack-authentication/)
+- [Demostack Domain Security](https://apis.io/security/demostack/demostack-domain-security/)
+- [Demostack Trust Center](https://apis.io/security/demostack/demostack-trust-center/)
+- [Demostack Vulnerability Disclosure](https://apis.io/security/demostack/demostack-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Demostack Scopes](https://apis.io/scopes/demostack/demostack-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Demostack Plans Pricing](https://apis.io/plans/demostack/demostack-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Demostack Rate Limits](https://apis.io/rate-limits/demostack/demostack-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Demostack Finops](https://apis.io/finops/demostack/demostack-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.demostack.com)
+- [Documentation](https://help.demostack.com/)
+- [Pricing](https://www.demostack.com/pricing)
+- [Support](https://www.demostack.com/contact-us)
+- [Blog](https://www.demostack.com/blog)
+- [Security](https://www.demostack.com/trust-center)
+- [Compliance](https://www.demostack.com/trust-center)
+- [Terms of service](https://www.demostack.com/termsandconditions)
+- [Privacy policy](https://www.demostack.com/privacy)
+- [Status](https://status.demostack.com)
+
+## API Evangelist rating
+
+**Kin Score 49.0** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 53.2 |
+| Contract governance | 18.2 |
+| Operational transparency | 42.1 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 53.9 |
+
+**Agent readiness 47.1** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 41.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/demostack/](https://apis.io/providers/demostack/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Demostack: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/demostack/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
